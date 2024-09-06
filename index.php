@@ -86,16 +86,38 @@
       <div class="thumnail"><img src="image/img8.jpg" alt="" /></div>
     </section>
     <hr />
-    <section class="Contact">
+<section class="Contact">
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "contacts";
+$connect = mysqli_connect($servername, $username, $password, $database);
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $name = isset($_POST['name']) ? $_POST['name'] : '';
+    $phno = isset($_POST['phno']) ? $_POST['phno'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $concern = isset($_POST['concern']) ? $_POST['concern'] : '';
+    $sql = "INSERT INTO `lingaraj_sanitary` (`Name`, `Phno`, `email`, `concern`) VALUES ( '$name', '$phno', '$email', '$concern')";
+
+    $result = mysqli_query($connect, $sql);
+}
+if($result){
+  echo '<script>  alert("YOUR CONCERN IS SUBMITTED , WE WILL CONTACT YOU SOON..");   </script>';
+}
+?>
       <h2 class="formh2">Contact us</h2>
       <div class="form">
-        <input class="form_input""text" name="name" id="name" placeholder="   Enter your name"> <input class="form_input""text" name="phone"
-        id="phone" placeholder="   Enter your phone number"> <input
+        <form action="/SHOP WEB/index.php" method="post">
+        <input class="form_input""text" name="name" id="name" placeholder="   Enter your name"> <input class="form_input""text" name="phno"
+        id="phno" placeholder="   Enter your phone number"> <input
         class="form_input""email" name="email" id="email" placeholder="   Enter your email">
         <textarea
           class="form_input"
-          name="text"
-          id=" text"
+          name="concern"
+          id=" concern"
           cols="30"
           rows="8"
           placeholder="Ellaborate your concern"
@@ -103,6 +125,7 @@
         <div class="click">
         <button class="btn2">Submit</button>
         </div>
+       </form>
       </div>
     </section>
     <footer class="flex-all-center">
